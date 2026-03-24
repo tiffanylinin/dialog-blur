@@ -1,0 +1,42 @@
+// ─────────────────────────────────────────────────────────────────
+//  build.gradle.kts  —  required dependencies for the Blur Dialog
+//  Add these inside your commonMain { dependencies { ... } } block
+// ─────────────────────────────────────────────────────────────────
+
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+
+            // Haze — cross-platform blur / glassmorphism for Compose Multiplatform
+            // Docs: https://chrisbanes.github.io/haze/
+            implementation("dev.chrisbanes.haze:haze:1.0.3")
+
+            // Coil 3 — async image loading (KMP-compatible)
+            // Docs: https://coil-kt.github.io/coil/
+            implementation("io.coil-kt.coil3:coil-compose:3.1.0")
+            implementation("io.coil-kt.coil3:coil-network-ktor:3.1.0")
+
+            // Compose Material 3 (if not already included)
+            implementation(compose.material3)
+            implementation(compose.materialIconsExtended)
+        }
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  File overview
+//
+//  FocusScreen.kt      — top-level screen; wires hazeState between
+//                        AppBackground (blur source) and the dialog
+//
+//  FocusDialog.kt      — glassmorphic card with:
+//                          • hazeChild (background blur, radius 70dp)
+//                          • semi-transparent white fill
+//                          • ColorDodge tint
+//                          • gradient border (white 30% → white 10%)
+//                          • hero image, title, description, CTA button
+//                          • absolute-positioned close button
+//
+//  PaginationDots.kt   — row of 6dp dots; active = #3FAB94 teal
+//
+// ─────────────────────────────────────────────────────────────────
